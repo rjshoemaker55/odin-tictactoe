@@ -1,0 +1,35 @@
+h1 {
+  text-align: center;
+}
+
+.tictactoe-board {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  margin: 100px auto;
+  justify-content: center;
+}
+
+.tictactoe-board__square {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 55px;
+}
+
+.tictactoe-board__square.top-row {
+  border-top: none;
+}
+
+.tictactoe-board__square.right-column {
+  border-right: none;
+}
+
+.tictactoe-board__square.bottom-row {
+  border-bottom: none;
+}
+
+.tictactoe-board__square.left-column {
+  border-left: none;
+}
