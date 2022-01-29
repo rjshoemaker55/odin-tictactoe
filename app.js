@@ -1,6 +1,8 @@
 const gameBoard = {
   layout: ['', '', '', '', '', '', '', '', ''],
   currentPlayer: '',
+  gameStarted: false,
+  gameOver: false,
   init: function () {
     this.cacheDom()
     this.render()
@@ -11,18 +13,28 @@ const gameBoard = {
     this.squares.forEach((square, i) =>
       square.addEventListener('click', () => this.handleMove(i))
     )
+    this.winnerDisplay = document.getElementById('winner-display')
+    this.startBtn = document.getElementById('start-btn')
+    this.startBtn.addEventListener('click', this.startGame.bind(this))
   },
   render: function () {
     this.squares.forEach((square, i) => {
       square.innerText = this.layout[i]
     })
   },
+  startGame: function () {
+    this.resetGame()
+    this.startBtn.style = 'display: none'
+  },
   handleMove: function (square) {
-    if (this.gameOver) {
-      alert('the game is over!')
-    } else {
-      this.addMark(this.currentPlayer, square)
-      this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X'
+    if (this.gameStarted) {
+      if (this.gameOver) {
+        alert('the game is over!')
+      } else {
+        if (this.addMark(this.currentPlayer, square)) {
+          this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X'
+        }
+      }
     }
   },
   addMark: function (player, index) {
@@ -30,8 +42,10 @@ const gameBoard = {
       this.layout[index] = player
       this.render()
       this.checkWinner()
+      return 1
     } else {
       alert('already picked')
+      return 0
     }
   },
   checkWinner: function () {
@@ -40,15 +54,24 @@ const gameBoard = {
         this.layout[combo[0]] === this.layout[combo[1]] &&
         this.layout[combo[0]] === this.layout[combo[2]]
       ) {
-        if (!this.layout[combo[0]] === '') {
-          console.log(this.layout[combo[0]])
-          return this.endGame(this.layout[combo[0]])
+        if (this.layout[combo[0]] !== '') {
+          this.endGame(this.layout[combo[0]])
         }
       }
     })
   },
   endGame: function (player) {
-    alert(`${player} wins!`)
+    this.gameOver = true
+    this.winnerDisplay.innerText = `Player ${player} wins!`
+    this.startBtn.style = 'display: block'
+  },
+  resetGame: function () {
+    this.layout.forEach((square, i) => (this.layout[i] = ''))
+    this.gameOver = false
+    this.gameStarted = true
+    this.winnerDisplay.innerText = ''
+    currentPlayer = 'X'
+    this.render()
   }
 }
 

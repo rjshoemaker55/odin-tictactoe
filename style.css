@@ -1,5 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+:root {
+  --light-blue-color: rgb(194, 194, 255);
+  --light-yellow-color: rgb(255, 255, 208);
+  --light-green-color: rgb(210, 255, 210);
+}
+
+body {
+  background-color: var(--light-blue-color);
+}
+
 h1 {
   text-align: center;
+  padding: 30px 0;
+  background-color: var(--light-yellow-color);
+}
+
+h2 {
+  padding: 20px 0;
+  text-align: center;
+  height: 40px;
+  color: rgb(7, 100, 0);
 }
 
 .tictactoe-board {
@@ -16,6 +43,7 @@ h1 {
   justify-content: center;
   align-items: center;
   font-size: 55px;
+  cursor: pointer;
 }
 
 .tictactoe-board__square.top-row {
@@ -32,4 +60,26 @@ h1 {
 
 .tictactoe-board__square.left-column {
   border-left: none;
+}
+
+.btn {
+  padding: 20px 50px;
+  border-radius: 25px;
+  border: none;
+  font-size: 25px;
+  font-weight: bold;
+  margin: auto;
+  display: block;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+
+.btn.start-btn {
+  box-shadow: 0 0 0 15px var(--light-yellow-color);
+  background-color: var(--light-green-color);
+}
+
+.btn.start-btn:hover {
+  box-shadow: 0 0 10px 15px var(--light-green-color);
+  background-color: var(--light-yellow-color);
 }
